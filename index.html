@@ -1,0 +1,494 @@
+<!DOCTYPE html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+      rel="stylesheet"
+    />
+    <title>Sistem Informasi Akademik</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f4f8;
+        margin: 0;
+        padding: 0;
+      }
+
+      .header {
+        background-color: #4ca8af;
+        color: white;
+        text-align: center;
+        padding: 20px 0;
+      }
+
+      .header img {
+        height: 50px;
+      }
+
+      .container {
+        max-width: 800px;
+        margin: 20px auto;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+      }
+
+      .menu {
+        margin-top: 20px;
+      }
+
+      .menu a {
+        display: block;
+        padding: 10px 15px;
+        text-decoration: none;
+        color: #333;
+        border-bottom: 1px solid #ddd;
+        transition: background-color 0.3s;
+      }
+
+      .menu a.active {
+        background-color: #4ca8af;
+        color: white;
+      }
+
+      .menu a:hover {
+        background-color: #f1f1f1;
+      }
+
+      .section {
+        margin-top: 20px;
+        display: none; /* Sembunyikan semua bagian secara default */
+      }
+
+      .section:target {
+        display: block; /* Tampilkan bagian yang ditarget */
+      }
+
+      .form-group {
+        margin-bottom: 15px;
+      }
+
+      .form-group label {
+        display: block;
+        margin-bottom: 5px;
+      }
+
+      .form-group input,
+      .form-group select {
+        width: 100%;
+        padding: 8px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+      }
+
+      .button {
+        background-color: #4ca8af;
+        color: white;
+        border: none;
+        padding: 10px 15px;
+        border-radius: 5px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+      }
+
+      .button:hover {
+        background-color: #4ca8af;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      table,
+      th,
+      td {
+        border: 1px solid #ddd;
+      }
+
+      th,
+      td {
+        padding: 8px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #4ca8af;
+        color: white;
+      }
+
+      .profile-photo {
+        width: 150px;
+        height: 150px;
+        border-radius: 75px;
+        object-fit: cover;
+        margin-bottom: 15px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      footer {
+        text-align: center;
+        padding: 10px 0;
+        background-color: #4ca8af;
+        color: white;
+        position: relative;
+        bottom: 0;
+        width: 100%;
+      }
+
+      .beranda-content {
+        text-align: center;
+      }
+
+      @media (max-width: 600px) {
+        .container {
+          margin: 10px;
+          padding: 15px;
+        }
+
+        .profile-photo {
+          width: 100px;
+          height: 100px;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1>Sistem Informasi Akademik</h1>
+    </div>
+
+    <div class="section" id="beranda" style="display: block">
+      <div class="beranda-content">
+        <img class="profile-photo" src="foto profil.jpeg" alt="Foto Profil" />
+        <p>Nama: <strong>Suprapto</strong></p>
+        <p>Program Studi: <strong>S1 Teknologi Informasi</strong></p>
+        <p>NIM: <strong>101220096</strong></p>
+        <p>
+          Selamat datang di sistem informasi akademik! Silakan pilih menu di
+          atas untuk mengakses informasi akademik Anda.
+        </p>
+      </div>
+    </div>
+
+    <div class="container">
+      <div class="menu">
+        <a href="#" class="active" onclick="showSection('beranda')">Beranda</a>
+        <a href="#" onclick="showSection('krs')">KRS Mahasiswa</a>
+        <a href="#" onclick="showSection('khs')">KHS Mahasiswa</a>
+        <a href="#" onclick="showSection('nilai')">Nilai Kumulatif</a>
+        <a href="#" onclick="showSection('keuangan')">Keuangan</a>
+        <a href="#" onclick="showSection('profil')">Profil Mahasiswa</a>
+        <a href="#" onclick="showSection('ubah-kata-sandi')">Ubah Kata Sandi</a>
+        <a href="#" onclick="showSection('keluar')">Keluar</a>
+      </div>
+
+      <div class="section" id="krs">
+        <h2>Kartu Rencana Studi (KRS)</h2>
+        <form id="krs-form">
+          <div class="form-group">
+            <label for="mata-kuliah">Mata Kuliah</label>
+            <select id="mata-kuliah">
+              <option value="matematika">Matematika</option>
+              <option value="fisika">Fisika</option>
+              <option value="informatika">Informatika</option>
+              <option value="statistika">Statistika</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="semester">Semester</label>
+            <select id="semester">
+              <option value="1">1</option>
+              <option value="2">2</option>
+              <option value="3">3</option>
+              <option value="4">4</option>
+            </select>
+          </div>
+          <button type="button" class="button" onclick="createKRS()">
+            Tambah KRS
+          </button>
+        </form>
+        <h3>Daftar KRS</h3>
+        <table id="krs-table">
+          <thead>
+            <tr>
+              <th>Mata Kuliah</th>
+              <th>Semester</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+
+      <div class="section" id="khs">
+        <h2>KHS Mahasiswa</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Mata Kuliah</th>
+              <th>Semester</th>
+              <th>Nilai</th>
+              <th>Aksi</th>
+            </tr>
+          </thead>
+          <tbody id="khs-table-body">
+            <tr>
+              <td>Matematika</td>
+              <td>1</td>
+              <td>A</td>
+              <td><button onclick="deleteKHS(this)">Hapus</button></td>
+            </tr>
+            <tr>
+              <td>Fisika</td>
+              <td>1</td>
+              <td>B</td>
+              <td><button onclick="deleteKHS(this)">Hapus</button></td>
+            </tr>
+            <tr>
+              <td>Informatika</td>
+              <td>2</td>
+              <td>A</td>
+              <td><button onclick="deleteKHS(this)">Hapus</button></td>
+            </tr>
+            <tr>
+              <td>Statistika</td>
+              <td>2</td>
+              <td>B+</td>
+              <td><button onclick="deleteKHS(this)">Hapus</button></td>
+            </tr>
+            <tr>
+              <td>Jaringan Komputer</td>
+              <td>3</td>
+              <td>A</td>
+              <td><button onclick="deleteKHS(this)">Hapus</button></td>
+            </tr>
+            <tr>
+              <td>Pengantar Sistem Informasi</td>
+              <td>3</td>
+              <td>B</td>
+              <td><button onclick="deleteKHS(this)">Hapus</button></td>
+            </tr>
+            <tr>
+              <td>Basis Data</td>
+              <td>4</td>
+              <td>A</td>
+              <td><button onclick="deleteKHS(this)">Hapus</button></td>
+            </tr>
+            <tr>
+              <td>Analisis Algoritma</td>
+              <td>4</td>
+              <td>B+</td>
+              <td><button onclick="deleteKHS(this)">Hapus</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section" id="nilai">
+        <h2>Nilai Kumulatif</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Mata Kuliah</th>
+              <th>Semester</th>
+              <th>Nilai</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Matematika</td>
+              <td>1</td>
+              <td>A</td>
+            </tr>
+            <tr>
+              <td>Fisika</td>
+              <td>1</td>
+              <td>B</td>
+            </tr>
+            <tr>
+              <td>Informatika</td>
+              <td>2</td>
+              <td>A</td>
+            </tr>
+            <tr>
+              <td>Statistika</td>
+              <td>2</td>
+              <td>B+</td>
+            </tr>
+            <tr>
+              <td>Jaringan Komputer</td>
+              <td>3</td>
+              <td>A</td>
+            </tr>
+            <tr>
+              <td>Pengantar Sistem Informasi</td>
+              <td>3</td>
+              <td>B</td>
+            </tr>
+            <tr>
+              <td>Basis Data</td>
+              <td>4</td>
+              <td>A</td>
+            </tr>
+            <tr>
+              <td>Analisis Algoritma</td>
+              <td>4</td>
+              <td>B+</td>
+            </tr>
+          </tbody>
+        </table>
+        <h3>IPK: <strong>3.65</strong></h3>
+        <h3>Total SKS: <strong>24</strong></h3>
+      </div>
+
+      <div class="section" id="keuangan">
+        <h2>Keuangan</h2>
+        <table>
+          <thead>
+            <tr>
+              <th>Jenis Pembayaran</th>
+              <th>Jumlah</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>UKT</td>
+              <td>Rp 2.000.000</td>
+              <td>Sudah Dibayar</td>
+            </tr>
+            <tr>
+              <td>SPP</td>
+              <td>Rp 1.500.000</td>
+              <td>Belum Dibayar</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="section" id="profil">
+        <h2>Profil Mahasiswa</h2>
+        <img class="profile-photo" src="foto profil.jpeg" alt="Foto Profil" />
+        <p>Nama Lengkap: <strong>Suprapto</strong></p>
+        <p>NIM: <strong>101220096</strong></p>
+        <p>Program Studi: <strong>S1 Teknologi Informasi</strong></p>
+        <p>Nama Ayah: <strong>H. Ahmad</strong></p>
+        <p>Nama Ibu: <strong>Rina Sari</strong></p>
+        <p>Alamat: <strong>Jl. Kenangan No. 5, Pekalongan</strong></p>
+        <p>Nomor Telepon: <strong>081234567890</strong></p>
+        <p>Email: <strong>suprapto@example.com</strong></p>
+      </div>
+
+      <div class="section" id="ubah-kata-sandi">
+        <h2>Ubah Kata Sandi</h2>
+        <form>
+          <div class="form-group">
+            <label for="current-password">Kata Sandi Saat Ini</label>
+            <input type="password" id="current-password" required />
+          </div>
+          <div class="form-group">
+            <label for="new-password">Kata Sandi Baru</label>
+            <input type="password" id="new-password" required />
+          </div>
+          <button type="button" class="button" onclick="ubahKataSandi()">
+            Ubah Kata Sandi
+          </button>
+        </form>
+      </div>
+
+      <div class="section" id="keluar">
+        <h2>Keluar</h2>
+        <p>
+          Anda telah berhasil keluar dari sistem. Terima kasih telah menggunakan
+          layanan kami!
+        </p>
+      </div>
+    </div>
+
+    <footer>
+      <p>
+        &copy; 2024 Institut Teknologi dan Sains Nahdlatul Ulama' Pekalongan
+      </p>
+    </footer>
+
+    <script>
+      let krsList = [];
+
+      // Menampilkan bagian yang sesuai
+      function showSection(sectionId) {
+        // Semua bagian disembunyikan
+        var sections = document.querySelectorAll(".section");
+        sections.forEach(function (section) {
+          section.style.display = "none";
+        });
+
+        // Bagian yang dipilih ditampilkan
+        document.getElementById(sectionId).style.display = "block";
+
+        // Link menu yang sesuai diaktifkan
+        var menuLinks = document.querySelectorAll(".menu a");
+        menuLinks.forEach(function (link) {
+          link.classList.remove("active");
+        });
+        document
+          .querySelector(
+            ".menu a[onclick=\"showSection('" + sectionId + "')\"]"
+          )
+          .classList.add("active");
+      }
+
+      // Menambahkan KRS
+      function createKRS() {
+        const mataKuliah = document.getElementById("mata-kuliah").value;
+        const semester = document.getElementById("semester").value;
+
+        krsList.push({ mataKuliah, semester });
+        updateKRSTable();
+        document.getElementById("krs-form").reset();
+      }
+
+      // Mengupdate tabel KRS
+      function updateKRSTable() {
+        const tbody = document.querySelector("#krs-table tbody");
+        tbody.innerHTML = "";
+        krsList.forEach((item, index) => {
+          const row = `<tr>
+                                <td>${item.mataKuliah}</td>
+                                <td>${item.semester}</td>
+                                <td><button onclick="deleteKRS(${index})">Hapus</button></td>
+                             </tr>`;
+          tbody.innerHTML += row;
+        });
+      }
+
+      // Menghapus KRS
+      function deleteKRS(index) {
+        krsList.splice(index, 1);
+        updateKRSTable();
+      }
+
+      // Menghapus KHS
+      function deleteKHS(button) {
+        const row = button.closest("tr");
+        row.parentNode.removeChild(row);
+      }
+
+      // Mengubah kata sandi
+      function ubahKataSandi() {
+        const currentPassword =
+          document.getElementById("current-password").value;
+        const newPassword = document.getElementById("new-password").value;
+
+        // Logika untuk mengubah kata sandi dapat ditambahkan di sini
+        alert("Kata Sandi Berhasil Diubah!");
+      }
+    </script>
+  </body>
+</html>
